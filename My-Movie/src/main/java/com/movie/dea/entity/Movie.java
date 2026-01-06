@@ -40,4 +40,23 @@ public class Movie {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public Object getDuration() {
+        return null;
+    }
+
+    public void setDuration(Object duration) {
+    }
+
+    public Object getRating() {
+
+        String getReleaseDate;
+
+        return "";
+    }
+
+    public String getReleaseDate() {
+
+        return "";
+    }
 }

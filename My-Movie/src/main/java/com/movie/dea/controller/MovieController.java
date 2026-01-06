@@ -1,20 +1,47 @@
 package com.movie.dea.controller;
 
+import com.movie.dea.entity.Movie;
 import com.movie.dea.servise.MovieService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/api/movies")
-public class MovieController {
+import java.util.List;
 
-    private final MovieService movieService;
 
-    public MovieController(MovieService movieService) {
-        this.movieService = movieService;
+    @RestController
+    @RequestMapping("/api/movies")
+    public class MovieController {
+
+        private final MovieService movieService;
+
+        public MovieController(MovieService movieService) {
+            this.movieService = movieService;
+        }
+
+        @GetMapping("/all")
+        public List<Movie> getMovies() {
+            return movieService.getAllMovie();
+        }
+
+        @GetMapping("/{id}")
+        public Movie getMovieById(@PathVariable Integer id) {
+            return movieService.getMovie(id);
+        }
+
+        @PostMapping("/add")
+        public Movie createMovie(@RequestBody Movie movie) {
+            return movieService.createMovie(movie);
+        }
+
+        @PutMapping("/update/{id}")
+        public Movie updateMovie(@PathVariable Integer id, @RequestBody Movie movie) {
+            return movieService.updateMovie(id, movie);
+            
+        }
+        
+        @DeleteMapping("/delete/{id}")
+        public  String deleteMovie(@PathVariable Integer id){
+            return movieService.deleteById(id);
+        }
+
     }
-
-
-}
-
 
