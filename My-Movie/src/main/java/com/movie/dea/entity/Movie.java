@@ -59,4 +59,11 @@ public class Movie {
 
         return "";
     }
+
+    public void setRating(Object rating) {
+    }
+
+    public void setReleaseDate(String releaseDate) {
+
+    }
 }
