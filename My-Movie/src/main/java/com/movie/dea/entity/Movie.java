@@ -1,28 +1,71 @@
 package com.movie.dea.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.Data;
+
+import java.time.LocalDate;
 
 @Entity
+@Data
 @Table(name = "movies")
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String title;
-    private String genre;
 
-    public Movie(Integer id, String title, String genre) {
+    @NotBlank(message = "Title is required!")
+//    @NotBlank(message = "Title is required!")
+    private String title;
+    @NotBlank(message = "Genre is required!")
+//    @NotBlank(message = "Genre is required!")
+    private String genre;
+    @NotNull(message = "dont leave empty")
+//    @NotNull(message = "dont leave empty")
+    private LocalDate releaseDate;
+    @NotNull(message = "dont leave empty")
+//    @NotNull(message = "dont leave empty")
+    private Double rating;
+    @NotBlank(message = "Duration is required!")
+//    @NotBlank(message = "Duration is required!")
+    private String duration;
+
+    public Movie() {
+
+    }
+
+    public Movie(Integer id, String title, String genre, String duration, Double rating, LocalDate releaseDate) {
         this.id = id;
         this.title = title;
         this.genre = genre;
+        this.duration = duration;
+        this.rating = rating;
+        this.releaseDate = releaseDate;
     }
 
-    public String getGenre() {
-        return genre;
+    public LocalDate getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public void setReleaseDate(LocalDate releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
     }
 
     public Integer getId() {
@@ -41,29 +84,11 @@ public class Movie {
         this.title = title;
     }
 
-    public Object getDuration() {
-        return null;
+    public String getGenre() {
+        return genre;
     }
 
-    public void setDuration(Object duration) {
-    }
-
-    public Object getRating() {
-
-        String getReleaseDate;
-
-        return "";
-    }
-
-    public String getReleaseDate() {
-
-        return "";
-    }
-
-    public void setRating(Object rating) {
-    }
-
-    public void setReleaseDate(String releaseDate) {
-
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 }

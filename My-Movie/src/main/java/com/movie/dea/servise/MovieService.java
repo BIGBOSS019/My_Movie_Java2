@@ -1,7 +1,9 @@
 package com.movie.dea.servise;
 
 import com.movie.dea.entity.Movie;
+//import com.movie.dea.exception.MovieNotFoundException;
 import com.movie.dea.repository.MovieRepository;
+import org.jspecify.annotations.Nullable;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,6 +44,7 @@ public class MovieService {
     public Movie getMovie(@PathVariable Integer id) {
         return movieRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("No such a movie in db: " + id));
+
     }
 
     public Page<Movie> getMoviesByPage(@RequestParam int page, @RequestParam int size){
@@ -71,7 +74,7 @@ public class MovieService {
     }
 
 
-    public List<Movie> search(@PathVariable String title, @PathVariable String genre) {
+    public List<Movie> search(@PathVariable String title, @PathVariable String genre, Sort sort) {
         if (title != null && !title.isBlank()) {
             return movieRepository.findByTitleContainingIgnoreCase(title);
         }
@@ -80,8 +83,9 @@ public class MovieService {
             return movieRepository.findByGenre(genre);
         }
 
-        return movieRepository.findAll();
+        return movieRepository.findAll(sort);
     }
 
 
-}
+    }
+
