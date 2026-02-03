@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
-
-
 @RestController
 @RequestMapping("/api/movies")
 public class MovieController {
@@ -24,13 +22,9 @@ public class MovieController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size
     ) {
-        return movieService.getMoviesByPage(page, size);
+        return movieService.getMoviesByPage(page    , size);
     }
 
-    @GetMapping("/all")
-    public List<Movie> getMovies() {
-        return movieService.getAllMovie();
-    }
 //    @GetMapping("/all")
 //    public List<Movie> getMovies(){
 //        return movieService.getAllMovie(sort);
@@ -52,12 +46,12 @@ public class MovieController {
     }
 
     @GetMapping("/{id}")
-    public Movie getMovieById(@PathVariable Integer id) {
-        return (Movie) movieService.getMovie(id);
+    public Movie getMovieById(@PathVariable Integer id){
+        return movieService.getMovie(id);
     }
 
     @GetMapping("/date/{releaseDate}")
-    public List<Movie> getMovieByDate(@PathVariable LocalDate releaseDate) {
+    public List<Movie> getMovieByDate(@PathVariable LocalDate releaseDate){
         return movieService.getAllMovieByReleaseDate(releaseDate);
     }
 
@@ -72,7 +66,7 @@ public class MovieController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteMovie(@PathVariable Integer id) {
-        return movieService.deleteById(id);
+    public void deleteMovie(@PathVariable Integer id) {
+        movieService.deleteById(id);
     }
 }

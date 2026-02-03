@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
     <title>Movies</title>
 
     <!-- BOOTSTRAP -->
@@ -179,9 +178,26 @@
 
 <h2>Movies</h2>
 
+<div th:if="${success}"
+     style="color:green; font-weight:bold;">
+    <p th:text="${success}"></p>
+</div>
+<div th:if="${error}"
+     style="color:red; font-weight:bold; margin-bottom: 10px;">
+    <p th:text="${error}"></p>
+</div>
+
 <a href="/movies/new">Add Movie</a>
 
 <form method="get" action="/movies">
+    <a th:href="@{/movies(
+        sortBy='title',
+        direction=${sortBy == 'title' and direction == 'asc' ? 'desc' : 'asc'}
+    )}"> sort
+        <span th:if="${sortBy == 'title'}"
+              th:text="${direction == 'asc' ? '▲' : '▼'}"  ></span>
+    </a> <br>
+
     Search by title:
     <input type="text" name="title" th:value="${title}" />
 
@@ -196,7 +212,6 @@
 
 <table border="1">
     <tr>
-        <th>ID</th>
         <th>Title</th>
         <th>Genre</th>
         <th>Rating</th>
@@ -206,7 +221,6 @@
     </tr>
 
     <tr th:each="movie : ${movies}">
-        <td th:text="${movie.id}"></td>
         <td th:text="${movie.title}"></td>
         <td th:text="${movie.genre}"></td>
         <td th:text="${movie.rating}"></td>
