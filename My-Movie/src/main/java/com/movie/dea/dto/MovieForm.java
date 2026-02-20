@@ -50,7 +50,7 @@ public class MovieForm {
         this.duration = duration;
     }
 
-    public @NotBlank(message = "ReleaseDate required") String getReleaseDate() {
+    public LocalDate getReleaseDate() {
         return releaseDate;
     }
 
@@ -74,4 +74,12 @@ public class MovieForm {
     }
 
 
+    public void setDirectorId(Integer id) {
+
+    }
+
+    public Integer getDirectorId() {
+
+        return 0;
+    }
 }

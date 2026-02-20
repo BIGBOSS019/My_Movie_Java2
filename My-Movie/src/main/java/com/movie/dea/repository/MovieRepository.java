@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -24,4 +25,6 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
     List<Movie> findByReleaseDate(String releaseDate);
 
     Page<Movie> findAll(Pageable pageable); // pagination
+
+    List<Movie> findByReleaseDate(LocalDate releaseDate);
 }

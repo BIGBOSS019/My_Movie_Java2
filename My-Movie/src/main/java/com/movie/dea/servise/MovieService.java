@@ -1,13 +1,14 @@
 package com.movie.dea.servise;
 
-//import com.movie.dea.dto.MovieDTO;
+import com.movie.dea.Mapper.MovieMapper;
+import com.movie.dea.dto.MovieDTO;
 import com.movie.dea.dto.MovieForm;
-//import com.movie.dea.entity.Director;
+import com.movie.dea.entity.Director;
 import com.movie.dea.entity.Movie;
 import com.movie.dea.exception.MovieNotFoundException;
-//import com.movie.dea.mapper.MovieMapper;
-//import com.movie.dea.repository.DirectorRepository;
+import com.movie.dea.repository.DirectorRepository;
 import com.movie.dea.repository.MovieRepository;
+import org.jspecify.annotations.Nullable;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
@@ -114,25 +115,30 @@ public class MovieService {
 //    }
 
     public Page<Movie> searchPaginated(
-            public Page<MovieDTO> searchPaginatedDTO(
-                    String title,
-            String genre,
-            int page,
-            int size,
-            Sort sort
+            Page<MovieDTO> searchPaginatedDTO(String title;
+            String genre;
+            int page;
+            int size;
+            Sort sort;
     ) {
         Pageable pageable = PageRequest.of(page, size, sort);
 
         String safeTitle = (title == null) ? "" : title;
         String safeGenre = (genre == null) ? "" : genre;
 
-        return movieRepository.findByTitleContainingIgnoreCaseAndGenreContainingIgnoreCase(
-                Page<Movie> moviePage = movieRepository.findByTitleContainingIgnoreCaseAndGenreContainingIgnoreCase(
+        boolean moviePage;
+        return movieRepository.findByTitleContainingIgnoreCase(
+                Page<Movie> moviePage = movieRepository.findByTitleContainingIgnoreCase(
                         safeTitle,
                         safeGenre,
                         pageable
                 );
 
-        return moviePage.map(movieMapper::toDTO);
+        return moviePage;
+    }
+
+    public @Nullable Object search(String title, String genre, Sort sort) {
+
+        return null;
     }
 }
