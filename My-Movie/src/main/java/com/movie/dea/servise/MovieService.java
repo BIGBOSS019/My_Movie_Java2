@@ -15,8 +15,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 
-import static jdk.javadoc.internal.doclets.formats.html.markup.HtmlStyles.title;
-
 @Service
 public class MovieService {
     private final MovieRepository movieRepository;
@@ -32,6 +30,7 @@ public class MovieService {
     public List<Movie> getAllMovie() {
         return movieRepository.findAll();
     }
+
     //    public List<Movie> getAllMovieByTitle(String title) {
 //        return movieRepository.findByTitle(title);
 //    }
@@ -41,7 +40,8 @@ public class MovieService {
     public List<Movie> getAllMovieByMinRating(Double minRating) {
         return movieRepository.findByMinRating(minRating);
     }
-    public List<Movie> getAllMovieByReleaseDate(LocalDate releaseDate){
+
+    public List<Movie> getAllMovieByReleaseDate(LocalDate releaseDate) {
         return movieRepository.findByReleaseDate(releaseDate);
     }
 
@@ -51,7 +51,7 @@ public class MovieService {
 
     public Movie getMovie(Integer id) {
         return movieRepository.findById(id)
-                .orElseThrow(()-> new MovieNotFoundException("No such a movie in db with the following id: " + id));
+                .orElseThrow(() -> new MovieNotFoundException("No such a movie in db with the following id: " + id));
     }
 
     public Director getDirector(Integer id) {
@@ -74,7 +74,7 @@ public class MovieService {
         movieRepository.save(movie);
     }
 
-    public Page<Movie> getMoviesByPage(int page, int size){
+    public Page<Movie> getMoviesByPage(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return movieRepository.findAll(pageable);
     }
@@ -93,52 +93,34 @@ public class MovieService {
     }
 
     public void deleteById(Integer id) {
-        if(!movieRepository.existsById(id)){
+        if (!movieRepository.existsById(id)) {
             throw new MovieNotFoundException(
                     "No such a movie with id: " + id
             );
         }
         movieRepository.deleteById(id);
     }
+    
 
-
-//    public List<Movie> search(String title, String genre, Sort sort) {
-//        if (title != null && !title.isBlank()) {
-//            return movieRepository.findByTitleContainingIgnoreCase(title);
-//        }
-//
-//        if (genre != null && !genre.isBlank()) {
-//            return movieRepository.findByGenre(genre);
-//        }
-//
-//        return movieRepository.findAll(sort);
-//    }
-
-    public Page<Movie> searchPaginated(
-            Page<MovieDTO> searchPaginatedDTO(String title;
-            String genre;
-            int page;
-            int size;
-            Sort sort;
+    public Page<MovieDTO> searchPaginatedDTO(
+            String title,
+            String genre,
+            int page,
+            int size,
+            Sort sort
     ) {
         Pageable pageable = PageRequest.of(page, size, sort);
 
         String safeTitle = (title == null) ? "" : title;
         String safeGenre = (genre == null) ? "" : genre;
 
-        boolean moviePage;
-        return movieRepository.findByTitleContainingIgnoreCase(
-                Page<Movie> moviePage = movieRepository.findByTitleContainingIgnoreCase(
+
+                Page<Movie> moviePage = movieRepository.findByTitleContainingIgnoreCaseAndGenreContainingIgnoreCase(
                         safeTitle,
                         safeGenre,
                         pageable
                 );
 
-        return moviePage;
-    }
-
-    public @Nullable Object search(String title, String genre, Sort sort) {
-
-        return null;
+        return moviePage.map(movieMapper::toDTO);
     }
 }

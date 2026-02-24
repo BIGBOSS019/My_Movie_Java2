@@ -25,7 +25,6 @@ public class Movie {
     //    @NotBlank(message = "Duration is required!")
     private String duration;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "director_id") // Foreign key (FK) (PK) primary key
     private Director director;
