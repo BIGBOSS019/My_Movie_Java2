@@ -100,7 +100,7 @@ public class MovieService {
         }
         movieRepository.deleteById(id);
     }
-    
+
 
     public Page<MovieDTO> searchPaginatedDTO(
             String title,
