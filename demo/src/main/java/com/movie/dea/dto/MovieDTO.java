@@ -1,74 +1,66 @@
 package com.movie.dea.dto;
 
-import java.time.LocalDate;
+    public class MovieDTO {
+        private Integer id;
+        private String title;
+        private String releaseDate;
+        private String duration;
+        private String genre;
+        private Integer directorId;
+        private String directorName;
+        public String getDirectorName() {
+            return directorName;
+        }
 
-public class MovieDTO {
-    private Integer id;
-    private String title;
-    private String rating;
-    private LocalDate releaseDate;
-    private String duration;
-    private String genre;
-    private Integer directorId;
-    private String directorName;
-    public String getDirectorName() {
-        return directorName;
-    }
+        public void setDirectorName(String directorName) {
+            this.directorName = directorName;
+        }
 
-    public void setDirectorName(String directorName) {
-        this.directorName = directorName;
-    }
+        public Integer getId() {
+            return id;
+        }
 
-    public Integer getId() {
-        return id;
-    }
+        public void setId(Integer id) {
+            this.id = id;
+        }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+        public String getDuration() {
+            return duration;
+        }
 
-    public String getDuration() {
-        return duration;
-    }
+        public void setDuration(String duration) {
+            this.duration = duration;
+        }
 
-    public void setDuration(String duration) {
-        this.duration = duration;
-    }
+        public String getGenre() {
+            return genre;
+        }
 
-    public String getGenre() {
-        return genre;
-    }
+        public void setGenre(String genre) {
+            this.genre = genre;
+        }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
+        public Integer getDirectorId() {
+            return directorId;
+        }
 
-    public Integer getDirectorId() {
-        return directorId;
-    }
+        public void setDirectorId(Integer directorId) {
+            this.directorId = directorId;
+        }
 
-    public void setDirectorId(Integer directorId) {
-        this.directorId = directorId;
-    }
+        public String getReleaseDate() {
+            return releaseDate;
+        }
 
-    public LocalDate getReleaseDate() {
-        return releaseDate;
-    }
+        public void setReleaseDate(String releaseDate) {
+            this.releaseDate = releaseDate;
+        }
 
-    public void setReleaseDate(LocalDate releaseDate) {
-        this.releaseDate = releaseDate;
-    }
+        public String getTitle() {
+            return title;
+        }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getRating() {return rating;}
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-
-
+        public void setTitle(String title) {
+            this.title = title;
+        }
     }

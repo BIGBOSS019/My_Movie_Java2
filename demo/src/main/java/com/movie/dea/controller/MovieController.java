@@ -42,7 +42,7 @@ public class MovieController {
 
     @GetMapping("/rating/{minRating}")
     public List<Movie> getAllMoviesByMinRating(@PathVariable Double minRating) {
-        return movieService.getAllMovieByMinRating(minRating);
+        return movieService.getAllMovieByGenre(String.valueOf(minRating));
     }
 
     @GetMapping("/{id}")
@@ -52,7 +52,7 @@ public class MovieController {
 
     @GetMapping("/date/{releaseDate}")
     public List<Movie> getMovieByDate(@PathVariable LocalDate releaseDate){
-        return movieService.getAllMovieByReleaseDate(releaseDate);
+        return movieService.getAllMovieByReleaseDate(String.valueOf(releaseDate));
     }
 
     @PostMapping("/add")
@@ -67,6 +67,6 @@ public class MovieController {
 
     @DeleteMapping("/delete/{id}")
     public void deleteMovie(@PathVariable Integer id) {
-        movieService.deleteById(id);
+        movieService.deleteMovie(id);
     }
 }

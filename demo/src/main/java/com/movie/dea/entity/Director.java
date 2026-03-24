@@ -1,7 +1,7 @@
 package com.movie.dea.entity;
 
+import com.movie.dea.entity.Movie;
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity
@@ -10,15 +10,16 @@ public class Director {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @Column(nullable = false)
     private String name;
 
     @OneToMany(mappedBy = "director")
     private List<Movie> movies;
 
-    public Director(){
-
+        public Director(){
     }
+
     public Director(Integer id, String name, List<Movie> movies) {
         this.id = id;
         this.name = name;
