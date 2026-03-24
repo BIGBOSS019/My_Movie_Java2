@@ -1,5 +1,7 @@
 package com.movie.dea.controller;
 
+import com.movie.dea.dto.RegisterForm;
+import com.movie.dea.servise.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,34 +24,26 @@ public class AuthController {
         return "security/login";
     }
 
-        @GetMapping("/access-denied")
-        public String denied() {
-            return "error/access-denied";
-        }
-
-
-            @GetMapping("/register")
-            public String registerPage(Model model){
-                model.addAttribute("form" , new RegisterForm());
-                return "security/register";
-            }
-
-            @PostMapping("/register")
-            public String register(@Valid @ModelAttribute("form") RegisterForm form ,
-                    BindingResult bindingResult){
-                if (bindingResult.hasErrors()){
-                    return "security/register";
-                }
-
-                userService.wait(form);
-                return "redirect:/login";
-            }
-
-    private class UserService {
-        public void wait(@Valid RegisterForm form) {
-        }
+    @GetMapping("/access-denied")
+    public String denied() {
+        return "error/access-denied";
     }
 
-    private class RegisterForm {
+
+    @GetMapping("/register")
+    public String registerPage(Model model){
+        model.addAttribute("form" , new RegisterForm());
+        return "security/register";
+    }
+
+    @PostMapping("/register")
+    public String register(@Valid @ModelAttribute("form") RegisterForm form ,
+                           BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return "security/register";
+        }
+
+        userService.register(form);
+        return "redirect:/login";
     }
 }
